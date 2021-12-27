@@ -8,12 +8,11 @@ set nocompatible
 set number
 
 filetype off  " Load plugins according to detected filetype.
-syntax on                  " Enable syntax highlighting.
 
 set autoindent             " Indent according to previous line.
 set expandtab              " Use spaces instead of tabs.
-set softtabstop =4         " Tab key indents by 4 spaces.
-set shiftwidth  =4         " >> indents by 4 spaces.
+set softtabstop =2         " Tab key indents by 2 spaces.
+set shiftwidth  =2         " >> indents by 2 spaces.
 set shiftround             " >> indents to next multiple of 'shiftwidth'.
 
 set backspace   =indent,eol,start  " Make backspace work as you would expect.
@@ -37,6 +36,7 @@ set splitright             " Open new windows right of the current window.
 set wrapscan               " Searches wrap around end-of-file.
 set report      =0         " Always report changed lines.
 set synmaxcol   =200       " Only highlight the first 200 columns.
+set mouse=a
 
 set list                   " Show non-printable characters.
 if has('multi_byte') && &encoding ==# 'utf-8'
@@ -96,13 +96,16 @@ Plugin 'L9'
 Plugin 'FuzzyFinder'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
-
+Plugin 'othree/html5.vim'
+Plugin 'digitaltoad/vim-pug'
 " Install L9 and avoid a Naming conflict if you've already installed a
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
+syntax on                  " Enable syntax highlighting.
+syntax enable
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
