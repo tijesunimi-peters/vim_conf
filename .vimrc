@@ -1,4 +1,4 @@
-"
+ 
 " A (not so) minimal vimrc.
 "
 
@@ -98,6 +98,8 @@ Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'othree/html5.vim'
 Plugin 'digitaltoad/vim-pug'
+Plugin 'mechatroner/rainbow_csv'
+Plugin '907th/vim-auto-save'
 " Install L9 and avoid a Naming conflict if you've already installed a
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
@@ -144,3 +146,5 @@ map <silent> <leader>ft :Tags<CR>
 
 map <silent> <C-p> :Files<CR>
 
+" Auto save
+let g:auto_save = 1  " enable AutoSave on Vim startup
