@@ -6,6 +6,8 @@
 " We set it explicitely to make our position clear!
 set nocompatible
 set number
+set encoding=utf-8
+set termguicolors
 
 filetype off  " Load plugins according to detected filetype.
 
@@ -36,7 +38,8 @@ set splitright             " Open new windows right of the current window.
 set wrapscan               " Searches wrap around end-of-file.
 set report      =0         " Always report changed lines.
 set synmaxcol   =200       " Only highlight the first 200 columns.
-set mouse=a
+set mouse-=a
+set ruler
 
 set list                   " Show non-printable characters.
 if has('multi_byte') && &encoding ==# 'utf-8'
@@ -62,6 +65,14 @@ set updatecount =100
 set undofile
 set undodir     =$HOME/.vim/files/undo/
 set viminfo     ='100,n$HOME/.vim/files/info/viminfo
+
+" delete without yanking
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+
+" replace currently selected text with default register
+" without yanking it
+vnoremap <leader>p "_dP
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -91,7 +102,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'pangloss/vim-javascript'
 Plugin 'morhetz/gruvbox'
-Plugin 'valloric/youcompleteme'
+"Plugin 'valloric/youcompleteme'
 Plugin 'L9'
 Plugin 'FuzzyFinder'
 Plugin 'junegunn/fzf'
@@ -100,6 +111,9 @@ Plugin 'othree/html5.vim'
 Plugin 'digitaltoad/vim-pug'
 Plugin 'mechatroner/rainbow_csv'
 Plugin '907th/vim-auto-save'
+Plugin 'mattn/emmet-vim'
+Plugin 'stanangeloff/php.vim'
+Plugin 'https://github.com/ErichDonGubler/vim-sublime-monokai.git'
 " Install L9 and avoid a Naming conflict if you've already installed a
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
@@ -111,7 +125,7 @@ syntax enable
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
-colorscheme gruvbox
+colorscheme sublimemonokai 
 
 " NerdTree
 map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
