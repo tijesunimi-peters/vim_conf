@@ -114,6 +114,10 @@ Plugin '907th/vim-auto-save'
 Plugin 'mattn/emmet-vim'
 Plugin 'stanangeloff/php.vim'
 Plugin 'https://github.com/ErichDonGubler/vim-sublime-monokai.git'
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'jlanzarotta/bufexplorer'
+Plugin 'slarwise/vim-tmux-send'
+Plugin 'catppuccin/nvim', { 'as': 'catppuccin' }
 " Install L9 and avoid a Naming conflict if you've already installed a
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
@@ -125,7 +129,9 @@ syntax enable
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
-colorscheme sublimemonokai 
+colorscheme catppuchin-mocha 
+
+map <silent> <LocalLeader>nh :noh<CR>
 
 " NerdTree
 map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
@@ -159,6 +165,42 @@ map <silent> <leader>fb :Buffers<CR>
 map <silent> <leader>ft :Tags<CR>
 
 map <silent> <C-p> :Files<CR>
+map <silent> <leader>to :tabnew<CR>
+map <silent> <leader>tc :tabclose<CR>
+
+noremap <silent> <Leader>rs :call RunSpec('spec', '-fp')<CR>
+noremap <silent> <Leader>rd :call BindingPry()<CR>
+noremap <silent> <Leader>rrd :call BindingPryRemote()<CR>
+noremap <silent> <Leader>rb :call RunSpec(expand('%'), '-fd '. expand('%:p'))<CR>
+noremap <silent> <Leader>rf :call RunSpec(expand('%'), '-fd '. expand('%:p') . ':' . line('.'))<CR>
+
+" RSpec.vim mappings
+"map <Leader>t :call RunCurrentSpecFile()<CR>
+"map <Leader>s :call RunNearestSpec()<CR>
+"map <Leader>l :call RunLastSpec()<CR>
+"map <Leader>a :call RunAllSpecs()<CR>
+"
+
+function! BindingPry()
+  call append(line('.')-1, '')
+  call setline(line('.')-1, repeat(' ', indent('.')-1) . "require 'pry'; binding.pry")
+endfunction
+
+function! BindingPryRemote()
+  call append(line('.')-1, '')
+  call setline(line('.')-1, repeat(' ', indent('.')-1) . "require 'pry-remote'; binding.remote_pry")
+endfunction
+
+function! RunSpec(spec_path, spec_opts)
+  let speccish = match(@%, '_spec.rb$') != -1
+  if speccish
+    "execute '!bundle exec rspec ' . a:spec_opts . ' ' . a:spec_path
+    SendKeys("clear ENTER")
+    SendKeys("'bundle exec rspec " . a:spec_opts ."' ENTER")
+  else
+    echo '<< WARNING >> RunSpec() can only be called from inside spec files!'
+  endif
+endfunction
 
 " Auto save
 let g:auto_save = 1  " enable AutoSave on Vim startup
